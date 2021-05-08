@@ -1,1 +1,1 @@
-Spring Boot project microservice 1 REST client..
+Spring Boot project microservice 1 REST client.
