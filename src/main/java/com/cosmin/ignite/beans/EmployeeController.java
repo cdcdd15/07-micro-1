@@ -1,24 +1,33 @@
 package com.cosmin.ignite.beans;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import com.cosmin.ignite.feign.Micro1FeignClient;
 
 @RestController
 public class EmployeeController {
 
-	@Value("${service.url}")
-	private String url;
+	@Autowired
+	private Micro1FeignClient micro1FeignClient;
+	
+	
+//	@GetMapping("/hello-world/restTemplate")
+//	public ResponseEntity<String> hello() {
+//		System.out.println(this.url);
+//		RestTemplate restTemplate = new RestTemplate();
+//		ResponseEntity<String> response
+//		  = restTemplate.getForEntity(this.url + "/hello-world", String.class);
+//		
+//		return response;
+//	}
 	
 	@GetMapping("/hello-world")
-	public ResponseEntity<String> hello() {
-		System.out.println(this.url);
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> response
-		  = restTemplate.getForEntity(this.url + "/hello-world", String.class);
+	public ResponseEntity<String> helloWithFeign() {
+		System.out.println("Endpoint with feign.");
+		ResponseEntity<String> response = this.micro1FeignClient.getMessageFromMicro2();
 		
 		return response;
 	}
