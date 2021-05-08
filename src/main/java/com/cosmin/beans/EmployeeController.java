@@ -1,11 +1,11 @@
-package com.cosmin.ignite.beans;
+package com.cosmin.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cosmin.ignite.feign.Micro1FeignClient;
+import com.cosmin.feign.Micro1FeignClient;
 
 @RestController
 public class EmployeeController {
