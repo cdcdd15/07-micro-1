@@ -5,7 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@FeignClient(name = "micro1-service", url = "${SERVICE_URL:http://localhost:5001}")
+@FeignClient(name = "07-micro-2")
+//@FeignClient(name = "micro1-service", url = "${SERVICE_URL:http://localhost:5001}")
 public interface Micro1FeignClient {
 	
 	@RequestMapping(value = "/hello-world", method = RequestMethod.GET)

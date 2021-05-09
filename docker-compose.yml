@@ -3,24 +3,34 @@ networks:
   spring-micros-net:
     external: true
 services:
-  micro-2:
-    image: cosdin/07-micro-2:0.0.1-SNAPSHOT
-    container_name: micro2
+  naming-server:
+    image: cosdin/netflix-eureka-naming-server:0.0.1-SNAPSHOT
+#    container_name: naming-server
     ports:
-      - "5001:5001"
+      - "8761:8761"
     restart: always
     networks:
       - spring-micros-net
-
-  micro-1:
+  micro2:
+    image: cosdin/07-micro-2:0.0.1-SNAPSHOT
+#    container_name: micro2
+#    ports:
+#      - "5001:5001"
+    restart: always
+    depends_on:
+      - naming-server
+    networks:
+      - spring-micros-net
+  micro1:
     image: cosdin/07-micro-1:0.0.1-SNAPSHOT
-    container_name: micro1
+#    container_name: micro1
     ports:
       - "5000:5000"
     restart: always
     environment:
       SERVICE_URL: http://micro2:5001
     depends_on:
-      - micro2
+#      - micro2
+      - naming-server
     networks:
       - spring-micros-net
