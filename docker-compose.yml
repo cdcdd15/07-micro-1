@@ -4,7 +4,7 @@ networks:
     external: true
 services:
   zuul-api-gateway:
-    image: cosdin/netflix-eureka-naming-server:0.0.1-SNAPSHOT
+    image: cosdin/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT
 #    container_name: naming-server
     ports:
       - "8765:8765"
