@@ -3,6 +3,14 @@ networks:
   spring-micros-net:
     external: true
 services:
+  zuul-api-gateway:
+    image: cosdin/netflix-eureka-naming-server:0.0.1-SNAPSHOT
+#    container_name: naming-server
+    ports:
+      - "8765:8765"
+    restart: always
+    networks:
+      - spring-micros-net
   naming-server:
     image: cosdin/netflix-eureka-naming-server:0.0.1-SNAPSHOT
 #    container_name: naming-server
@@ -14,8 +22,8 @@ services:
   micro2:
     image: cosdin/07-micro-2:0.0.1-SNAPSHOT
 #    container_name: micro2
-#    ports:
-#      - "5001:5001"
+    ports:
+      - "5001:5001"
     restart: always
     depends_on:
       - naming-server
