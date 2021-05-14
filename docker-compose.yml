@@ -3,12 +3,40 @@ networks:
   spring-micros-net:
     external: true
 services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    restart: always
+    networks:
+      - spring-micros-net
+  zipkin-server:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    environment:
+      STORAGE_TYPE: mem
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    ports:
+      - "9411:9411"
+    restart: always
+    depends_on:
+      - rabbitmq
+    networks:
+      - spring-micros-net
   zuul-api-gateway:
     image: cosdin/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT
 #    container_name: naming-server
     ports:
       - "8765:8765"
     restart: always
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
+    depends_on:
+      - naming-server
+      - rabbitmq
+      - zipkin-server
     networks:
       - spring-micros-net
   naming-server:
@@ -25,8 +53,12 @@ services:
     ports:
       - "5001:5001"
     restart: always
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
     depends_on:
       - naming-server
+      - rabbitmq
+      - zipkin-server
     networks:
       - spring-micros-net
   micro1:
@@ -36,9 +68,12 @@ services:
       - "5000:5000"
     restart: always
     environment:
-      SERVICE_URL: http://micro2:5001
+#      SERVICE_URL: http://micro2:5001
+      RABBIT_URI: amqp://guest:guest@rabbitmq:5672
     depends_on:
-#      - micro2
+      - micro2
       - naming-server
+      - rabbitmq
+      - zipkin-server
     networks:
       - spring-micros-net
