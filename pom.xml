@@ -46,6 +46,16 @@
 			<groupId>org.springframework.amqp</groupId>
 			<artifactId>spring-rabbit</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+			<version>6.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<!--<optional>true</optional>-->
+		</dependency>
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
