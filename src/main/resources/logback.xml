@@ -10,7 +10,7 @@
 		<param name="Encoding" value="UTF-8" />
 
 		<!-- should be an env variable in production -->
-		<remoteHost>logstash-service-one</remoteHost>
+		<remoteHost>logstash-service</remoteHost>
 		<!-- <remoteHost>${LOGSTASH_SERVICE_REMOTE_HOST:logstash-service}</remoteHost> -->
 		
 		<!-- should be an env variable in production -->
