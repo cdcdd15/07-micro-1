@@ -13,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 @EnableFeignClients
 @EnableDiscoveryClient
 @Slf4j
-public class SpringBootMicroApplication {
+public class MicroOneApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootMicroApplication.class, args);
+		SpringApplication.run(MicroOneApplication.class, args);
 		String message = "is started";
 		StaticLogs.staticLogs(log, message);
 	}
