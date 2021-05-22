@@ -114,3 +114,10 @@ services:
       - XPACK_MONITORING_ENABLED=true
     networks:
       - spring-micros-net
+  spring-boot-admin-service:
+    image: cosdin/07-spring-admin-dev:0.0.1-SNAPSHOT
+    ports:
+      - "9090:9090"
+    restart: always
+    networks:
+      - spring-micros-net
