@@ -121,3 +121,11 @@ services:
     restart: always
     networks:
       - spring-micros-net
+  spring-config-server-service:
+    container_name: 'config-server-service'
+    image: cosdin/07-config-server:0.0.1-SNAPSHOT
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      - spring-micros-net
