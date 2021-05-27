@@ -1,0 +1,19 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>com.cosmin.</groupId>
+  <artifactId>aggregator-without-inheritance</artifactId>
+  <version>1.0</version>
+  <packaging>pom</packaging>
+ 
+  <modules>
+    <module>../../07-micro-1</module>
+    <module>../../07-micro-2</module>
+	<module>../../07-config-server</module>
+	<module>../../07-netflix-eureka</module>
+	<module>../../07-netflix-zuul</module>
+	<module>../../07-spring-admin-dev</module>
+	
+  </modules>
+</project>
