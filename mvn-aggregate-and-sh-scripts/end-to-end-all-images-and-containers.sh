@@ -1,5 +1,5 @@
 #prerequisite: check no images, containers, networks exist on local Docker
-<<'COMM2'
+#<<'COMM2'
 
 echo '<step1>prerequisite: check no images, containers, networks exist on local Docker'
 docker images
@@ -34,7 +34,7 @@ docker network create spring-micros-net
 
 echo '<step8>Run containers with docker compuse (this will first download all necessary images on the local Docker)'
 docker compose -f ../docker-compose.yml up -d
-COMM2
+#COMM2
 
 echo '<step9>List all containers locally'
 docker container list -a

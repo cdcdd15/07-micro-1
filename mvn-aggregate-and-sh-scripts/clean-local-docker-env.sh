@@ -13,8 +13,8 @@ docker rmi -f $(docker images -a -q)
 echo '<step5>List all images locally'
 docker images
 
-echo '<step6>Remove network'
-docker network remove spring-micros-net
+echo '<step6>Remove all networks (except the 3 default ones)'
+docker network remove spring-micros-net 07-micro-1_default
 
 echo '<step7>leave local docker environment clean: check no images, containers, networks exist on local Docker'
 docker images
