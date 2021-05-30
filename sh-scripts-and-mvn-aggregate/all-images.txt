@@ -1,6 +1,0 @@
-cosdin/07-micro-1:0.0.1-SNAPSHOT
-cosdin/07-micro-2:0.0.1-SNAPSHOT
-cosdin/07-config-server:0.0.1-SNAPSHOT
-cosdin/netflix-eureka-naming-server:0.0.1-SNAPSHOT
-cosdin/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT
-cosdin/07-spring-admin-dev:0.0.1-SNAPSHOT
