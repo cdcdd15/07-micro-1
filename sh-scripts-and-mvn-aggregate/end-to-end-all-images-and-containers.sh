@@ -3,7 +3,6 @@ SCRIPT_NICKNAME="end-to-end"
 
 echo ' '
 echo '<'${SCRIPT_NICKNAME} 'step1>kind of prerequisite: stop, delete and check no images, containers, networks exist on local Docker'
-#<<'COMM2'
 ./clean-local-docker-env.sh
 #docker images
 #docker container list -a
@@ -17,6 +16,7 @@ echo ' '
 echo '<'${SCRIPT_NICKNAME} 'step3>Push images to docker.io (Docker hub)'
 ./push-all-images-to-docker-hub.sh
 
+#:<<'COMM2'
 echo ' '
 echo '<'${SCRIPT_NICKNAME} 'step4>List all images locally'
 docker images

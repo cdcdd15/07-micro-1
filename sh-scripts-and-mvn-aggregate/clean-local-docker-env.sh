@@ -19,7 +19,7 @@ echo '<step5>Image list on local docker'
 docker images
 
 echo ' '
-echo '<step6>Remove all networks (except the 3 default ones)'
+echo '<step6>Remove 2 used networks (leave the 3 default ones)'
 docker network remove spring-micros-net 07-micro-1_default
 
 echo ' '

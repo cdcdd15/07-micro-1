@@ -14,21 +14,17 @@ echo '<step4>List all images locally'
 docker images
 
 echo ' '
-echo '<step5>Remove all images locally'
-#docker rmi -f $(docker images -a -q)
-
-echo ' '
-echo '<step6>List all containers locally'
+echo '<step5>List all containers locally'
 docker container list -a
 
 echo ' '
-echo '<step7>Create network'
+echo '<step6>Create network'
 docker network create spring-micros-net
 
 echo ' '
-echo '<step8>Run containers with docker compuse (this will first download all necessary images on the local Docker)'
+echo '<step7>Run containers with docker compuse (this will first download all necessary images on the local Docker)'
 docker compose -f ../docker-compose.yml up -d
 
 echo ' '
-echo '<step9>List all containers locally'
+echo '<step8>List all containers locally'
 docker container list -a
