@@ -15,7 +15,7 @@ function attempt-until-pull-image-function () {
    			echo "Image not exists. Try to pull it."
    			docker pull ${image_name}
  		fi
- 		sleep 5
+ 		sleep 2
 	done
 }
 
@@ -58,7 +58,19 @@ function check-image-exists-on-remote-repo() {
 }
 
 #declare an array variable with the list of images
-declare -a image_arr=("cosdin/07-micro-1:0.0.1-SNAPSHOT" "cosdin/07-micro-2:0.0.1-SNAPSHOT" "cosdin/07-config-server:0.0.1-SNAPSHOT" "cosdin/netflix-eureka-naming-server:0.0.1-SNAPSHOT" "cosdin/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT" "cosdin/07-spring-admin-dev:0.0.1-SNAPSHOT")
+declare -a image_arr=(
+	"cosdin/07-micro-1:0.0.1-SNAPSHOT"
+	"cosdin/07-micro-2:0.0.1-SNAPSHOT"
+	"cosdin/07-config-server:0.0.1-SNAPSHOT"
+	"cosdin/netflix-eureka-naming-server:0.0.1-SNAPSHOT"
+	"cosdin/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT"
+	"cosdin/07-spring-admin-dev:0.0.1-SNAPSHOT"
+	"rabbitmq:3-management-alpine"
+	"openzipkin/zipkin:latest"
+	"logstash:7.10.1"
+	"kibana:7.10.1"
+	"elasticsearch:7.10.1"
+	"openjdk:8-jdk-alpine")
 my_len=${#image_arr[@]}
 for (( i = 0 ; i < my_len ; i++))
 do
@@ -77,3 +89,6 @@ do
 	#call function
 	attempt-until-push-image-function "$i"
 done
+echo ' '
+echo 'Image list on local docker:'
+docker images

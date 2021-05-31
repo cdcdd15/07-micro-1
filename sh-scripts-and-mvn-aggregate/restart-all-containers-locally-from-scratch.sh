@@ -6,7 +6,11 @@ docker container list -a
 docker network list
 
 echo ' '
-echo '<step2>Build images locally'
+echo '<step2>sync local image Docker repo with remote Docker Hub repo.'
+./attempts-until-pull-or-push-all-images.sh
+
+echo ' '
+echo '<step3>Build images locally'
 mvn clean package -DskipTests
 
 echo ' '
