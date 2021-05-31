@@ -26,15 +26,16 @@ function attempt-until-push-image-function () {
 	do
  		echo ' '
  		echo 'attempt-until-push-image-function image name:' $image_name
- 		local BIGR=$(check-image-exists-on-remote-repo ${image_name})
+ 		local BIGR=$(check-image-exists-locally ${image_name})
+ 		#local BIGR=$(check-image-exists-on-remote-repo ${image_name})
  		echo 'response:' $BIGR
  		if [ $BIGR == true ]
  		then
    			echo "Image exists on remote repo"
+   			docker push ${image_name}
    			flag=false
  		else
    			echo "Image not exists. Try to push it."
-   			docker push ${image_name}
  		fi
  		sleep 5
 	done
@@ -57,38 +58,73 @@ function check-image-exists-on-remote-repo() {
     docker pull ${1} > /dev/null && echo true || echo false
 }
 
-#declare an array variable with the list of images
-declare -a image_arr=(
+while getopts a: flag
+do
+    case "${flag}" in
+        a) a=${OPTARG};;
+    esac
+done
+echo $a
+
+declare -a projects_image_arr=(
 	"cosdin/07-micro-1:0.0.1-SNAPSHOT"
 	"cosdin/07-micro-2:0.0.1-SNAPSHOT"
 	"cosdin/07-config-server:0.0.1-SNAPSHOT"
 	"cosdin/netflix-eureka-naming-server:0.0.1-SNAPSHOT"
 	"cosdin/netflix-zuul-api-gateway-server:0.0.1-SNAPSHOT"
-	"cosdin/07-spring-admin-dev:0.0.1-SNAPSHOT"
+	"cosdin/07-spring-admin-dev:0.0.1-SNAPSHOT")
+declare -a official_image_arr=(
 	"rabbitmq:3-management-alpine"
 	"openzipkin/zipkin:latest"
 	"logstash:7.10.1"
 	"kibana:7.10.1"
 	"elasticsearch:7.10.1"
 	"openjdk:8-jdk-alpine")
-my_len=${#image_arr[@]}
-for (( i = 0 ; i < my_len ; i++))
+my_len1=${#official_image_arr[@]}
+for (( i = 0 ; i < my_len1 ; i++))
 do
-  echo "Element [$i]: ${image_arr[$i]}"
+  echo "official_image [$i]: ${official_image_arr[$i]}"
+done
+my_len2=${#projects_image_arr[@]}
+for (( i = 0 ; i < my_len2 ; i++))
+do
+  echo "projects_image [$i]: ${projects_image_arr[$i]}"
 done
 
-#:<<'COMM2'
-for i in "${image_arr[@]}"
-do
-   attempt-until-pull-image-function "$i"
-done
-#COMM2
+c=0
 
-for i in "${image_arr[@]}"
-do
-	#call function
+if [ $a == 'project_pull' ]
+then
+	c=`expr $c + 1`
+	for i in "${projects_image_arr[@]}"
+	do
+   	attempt-until-pull-image-function "$i"
+	done
+fi
+
+if [ $a == 'official_pull' ]
+then
+	c=`expr $c + 1`
+	for i in "${official_image_arr[@]}"
+	do
+   	attempt-until-pull-image-function "$i"
+	done
+fi
+
+if [ $a == 'push' ]
+then
+	c=`expr $c + 1`
+	for i in "${projects_image_arr[@]}"
+	do
 	attempt-until-push-image-function "$i"
-done
+	done
+fi
+
+if [ $c == 0 ]
+then
+	echo '-a should have one of the 2 values: push or pull'
+fi
+
 echo ' '
 echo 'Image list on local docker:'
 docker images
