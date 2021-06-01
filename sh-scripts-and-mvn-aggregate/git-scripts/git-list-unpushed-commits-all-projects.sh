@@ -1,1 +1,0 @@
-git log origin/master..HEAD --pretty=format:'%C(auto)%h%d (%cr) %cn <%ce> %s'
