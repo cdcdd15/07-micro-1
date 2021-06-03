@@ -11,6 +11,6 @@ function max ()
 }
 
 # call the function:
-max 128 211
+max 228 311
 # use the result:
 echo $BIGR

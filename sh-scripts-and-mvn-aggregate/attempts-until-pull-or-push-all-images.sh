@@ -22,23 +22,21 @@ function attempt-until-pull-image-function () {
 function attempt-until-push-image-function () {
 	image_name=$1
     flag=true
-	while [ "$flag" = true ]
-	do
- 		echo ' '
- 		echo 'attempt-until-push-image-function image name:' $image_name
- 		local BIGR=$(check-image-exists-locally ${image_name})
- 		#local BIGR=$(check-image-exists-on-remote-repo ${image_name})
- 		echo 'response:' $BIGR
- 		if [ $BIGR == true ]
- 		then
-   			echo "Image exists on remote repo"
-   			docker push ${image_name}
-   			flag=false
- 		else
-   			echo "Image not exists. Try to push it."
- 		fi
- 		sleep 5
-	done
+	echo ' '
+	echo 'attempt-until-push-image-function image name:' $image_name
+	local BIGR=$(check-image-exists-locally ${image_name})
+	echo 'response:' $BIGR
+	if [ $BIGR == true ]
+	then
+		echo "Image exists locally so try push it."
+		until docker push ${image_name}
+		do
+  			echo "Try again"
+		done
+		#docker push ${image_name}
+	else
+		echo "Image not exists locally so cannot push it."
+	fi
 }
 
 function check-image-exists-locally () {
@@ -48,14 +46,6 @@ function check-image-exists-locally () {
 	else
   		echo true
 fi
-}
-
-function check-image-exists-on-remote-repo() {
-	image_name=$1
-	#echo "check-image-exists-on-remote-repo: ${1}"
-    #docker pull library/nginx:1.7.5 > /dev/null && echo "success1" || echo "failed1"
-    #if image does exist on docker hub, than try to pull it
-    docker pull ${1} > /dev/null && echo true || echo false
 }
 
 while getopts a: flag
@@ -80,15 +70,16 @@ declare -a official_image_arr=(
 	"kibana:7.10.1"
 	"elasticsearch:7.10.1"
 	"openjdk:8-jdk-alpine")
+	
 my_len1=${#official_image_arr[@]}
 for (( i = 0 ; i < my_len1 ; i++))
 do
-  echo "official_image [$i]: ${official_image_arr[$i]}"
+  #echo "official_image [$i]: ${official_image_arr[$i]}"
 done
 my_len2=${#projects_image_arr[@]}
 for (( i = 0 ; i < my_len2 ; i++))
 do
-  echo "projects_image [$i]: ${projects_image_arr[$i]}"
+  #echo "projects_image [$i]: ${projects_image_arr[$i]}"
 done
 
 c=0
@@ -98,7 +89,7 @@ then
 	c=`expr $c + 1`
 	for i in "${projects_image_arr[@]}"
 	do
-   	attempt-until-pull-image-function "$i"
+   		attempt-until-pull-image-function "$i"
 	done
 fi
 
@@ -107,7 +98,7 @@ then
 	c=`expr $c + 1`
 	for i in "${official_image_arr[@]}"
 	do
-   	attempt-until-pull-image-function "$i"
+   		attempt-until-pull-image-function "$i"
 	done
 fi
 
@@ -116,7 +107,7 @@ then
 	c=`expr $c + 1`
 	for i in "${projects_image_arr[@]}"
 	do
-	attempt-until-push-image-function "$i"
+		attempt-until-push-image-function "$i"
 	done
 fi
 
