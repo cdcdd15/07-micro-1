@@ -32,6 +32,7 @@ function attempt-until-push-image-function () {
 		until docker push ${image_name}
 		do
   			echo "Try again"
+  			sleep 4
 		done
 		#docker push ${image_name}
 	else

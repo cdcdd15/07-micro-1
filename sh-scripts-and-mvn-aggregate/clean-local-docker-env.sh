@@ -15,15 +15,11 @@ echo '<step4>Remove all images locally'
 docker rmi -f $(docker images -a -q)
 
 echo ' '
-echo '<step5>Image list on local docker'
-docker images
-
-echo ' '
-echo '<step6>Remove 2 used networks (leave the 3 default ones)'
+echo '<step5>Remove 2 used networks (leave the 3 default ones)'
 docker network remove spring-micros-net 07-micro-1_default
 
 echo ' '
-echo '<step7>leave local docker environment clean: check no images, containers, networks exist on local Docker'
+echo '<step6>leave local docker environment clean: check no images, containers, networks exist on local Docker'
 echo ' '
 echo 'Image list on local docker:'
 docker images
