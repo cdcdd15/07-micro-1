@@ -70,21 +70,23 @@ declare -a official_image_arr=(
 	"kibana:7.10.1"
 	"elasticsearch:7.10.1"
 	"openjdk:8-jdk-alpine")
-	
+
+<<'COMMENT1'
 my_len1=${#official_image_arr[@]}
 for (( i = 0 ; i < my_len1 ; i++))
 do
-  #echo "official_image [$i]: ${official_image_arr[$i]}"
+  echo "official_image [$i]: ${official_image_arr[$i]}"
 done
 my_len2=${#projects_image_arr[@]}
 for (( i = 0 ; i < my_len2 ; i++))
 do
-  #echo "projects_image [$i]: ${projects_image_arr[$i]}"
+  echo "projects_image [$i]: ${projects_image_arr[$i]}"
 done
+COMMENT1
 
 c=0
 
-if [ $a == 'project_pull' ]
+if [[ $a == 'project_pull' ]]
 then
 	c=`expr $c + 1`
 	for i in "${projects_image_arr[@]}"
@@ -93,7 +95,7 @@ then
 	done
 fi
 
-if [ $a == 'official_pull' ]
+if [[ $a == 'official_pull' ]]
 then
 	c=`expr $c + 1`
 	for i in "${official_image_arr[@]}"
@@ -102,7 +104,7 @@ then
 	done
 fi
 
-if [ $a == 'push' ]
+if [[ $a == 'push' ]]
 then
 	c=`expr $c + 1`
 	for i in "${projects_image_arr[@]}"
@@ -113,9 +115,9 @@ fi
 
 if [ $c == 0 ]
 then
-	echo '-a should have one of the 2 values: push or pull'
+	echo '-a should have one of the 2 values: project_pull, official_pull or push'
+else
+	echo ' '
+	echo 'Image list on local docker:'
+	docker images
 fi
-
-echo ' '
-echo 'Image list on local docker:'
-docker images
