@@ -1,4 +1,6 @@
 pipeline {
+    agent any
+
     environment {
         STACK_PREFIX = "my-project-stack-name"
     }
