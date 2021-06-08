@@ -1,6 +1,4 @@
 pipeline {
-    agent { node { label 'swarm-ci' } }
-
     environment {
         STACK_PREFIX = "my-project-stack-name"
     }
