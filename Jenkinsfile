@@ -19,17 +19,17 @@ pipeline {
                 sh "mvn clean package"
             }
         }
+        /*
         stage("Docker") {
             steps {
                 sh "docker --version"
             }
         }
-        /*
+        */
         stage("Clean Local Docker .sh script") {
             steps {
                 sh "./sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
             }
         }
-        */
     }
 }
