@@ -25,16 +25,15 @@ pipeline {
                 sh "docker --version"
             }
         }
-        */
         stage("Ping") {
             steps {
-                //sh "ping DESKTOP-5Q6PUT3"
                 sh "ping host.docker.internal"
             }
         }
+        */
         stage("Host .sh script") {
             steps {
-                sh "ssh Cosmin Dinu@DESKTOP-5Q6PUT3 ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
+                sh "ssh Cosmin Dinu@host.docker.internal ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
             }
         }
         stage("Local .sh script") {
