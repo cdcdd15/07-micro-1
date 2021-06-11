@@ -28,8 +28,8 @@ pipeline {
         */
         stage("Ping") {
             steps {
-                sh "ping DESKTOP-5Q6PUT3"
-                dh "ping host.docker.internal"
+                //sh "ping DESKTOP-5Q6PUT3"
+                sh "ping host.docker.internal"
             }
         }
         stage("Host .sh script") {
