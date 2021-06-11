@@ -26,7 +26,18 @@ pipeline {
             }
         }
         */
-        stage("Clean Local Docker .sh script") {
+        stage("Ping") {
+            steps {
+                sh "ping DESKTOP-5Q6PUT3"
+                dh "ping host.docker.internal"
+            }
+        }
+        stage("Host .sh script") {
+            steps {
+                sh "ssh Cosmin Dinu@DESKTOP-5Q6PUT3 ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
+            }
+        }
+        stage("Local .sh script") {
             steps {
                 sh "./sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
             }
