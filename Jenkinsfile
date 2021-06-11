@@ -33,7 +33,8 @@ pipeline {
         */
         stage("Host .sh script") {
             steps {
-                sh "ssh Cosmin Dinu@host.docker.internal ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
+                //sh "ssh Cosmin Dinu@host.docker.internal ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
+                sh "ssh host.docker.internal ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
             }
         }
         stage("Local .sh script") {
