@@ -35,10 +35,8 @@ pipeline {
             steps {
                 //sh "ssh Cosmin Dinu@host.docker.internal ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/clean-local-docker-env.sh"
                 //sh "ssh \"Cosmin Dinu\"@host.docker.internal ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/basic-script-examples/function-test.sh"
-                sh "ssh -o StrictHostKeyChecking=no host.docker.internal ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/basic-script-examples/function-test.sh"
-               
-                
                 sh "whoami"
+                sh "ssh -o StrictHostKeyChecking=no \"Cosmin Dinu\"@host.docker.internal ./c/javaDev/workspace/07-micro-1/sh-scripts-and-mvn-aggregate/basic-script-examples/function-test.sh"
             }
         }
         stage("Local .sh script") {
