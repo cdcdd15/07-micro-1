@@ -31,7 +31,7 @@ public class MicroOneController {
 	@GetMapping("/hello-world")
 	public ResponseEntity<String> helloWithFeign() {
 //		System.out.println("Endpoint with feign.");
-		StaticLogs.staticLogs(log, "from REST endpoint");
+//		StaticLogs.staticLogs(log, "from REST endpoint");
 		ResponseEntity<String> response = this.micro1FeignClient.getMessageFromMicro2();
 		
 		return response;

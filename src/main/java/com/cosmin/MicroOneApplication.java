@@ -18,6 +18,6 @@ public class MicroOneApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MicroOneApplication.class, args);
 		String message = "is started";
-		StaticLogs.staticLogs(log, message);
+//		StaticLogs.staticLogs(log, message);
 	}
 }

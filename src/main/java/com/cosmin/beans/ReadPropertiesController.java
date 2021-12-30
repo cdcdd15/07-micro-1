@@ -18,14 +18,14 @@ public class ReadPropertiesController {
 	
 	@PostConstruct
 	private void init() {
-		log.info("07-micro-1.val=" + val);
+//		log.info("07-micro-1.val=" + val);
 	}
 	
 	@GetMapping("/config")
 	public ResponseEntity<String> config(@Value("${07-micro-1.val}") String val)
 	{
 		String resp = "07-micro-1.val=" + val;
-		log.info("07-micro-1.val=" + resp);
+//		log.info("07-micro-1.val=" + resp);
 	    return new ResponseEntity<>(resp, HttpStatus.OK);
 	}
 }
