@@ -129,3 +129,18 @@ services:
     restart: always
     networks:
       - spring-micros-net
+  filebeat-service:
+    image: docker.elastic.co/beats/filebeat:7.16.3
+    command: filebeat -e -strict.perms=false
+    container_name: 'filebeat-service'
+    restart: always
+    volumes:
+      - ./filebeat.docker.yml:/usr/share/filebeat/filebeat.yml
+      - ./var/lib/docker/containers:/var/lib/docker/containers:ro
+      - ./var/run/docker.sock:/var/run/docker.sock:ro
+    user: root
+    environment:
+      - setup.kibana.host=http://localhost:5601
+      - output.elasticsearch.hosts=http://elastic-search:9200
+    networks:
+      - spring-micros-net
