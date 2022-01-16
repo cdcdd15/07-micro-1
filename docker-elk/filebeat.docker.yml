@@ -1,0 +1,21 @@
+filebeat.config:
+  modules:
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: false
+    
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /logs/*.log
+
+processors:
+- add_cloud_metadata: ~
+
+setup.kibana:
+  host: "localhost:5601"
+  username: "elastic"
+  password: "changeme"
+ 
+output.logstash:
+  hosts: ["logstash-service:5044"]
