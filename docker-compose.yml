@@ -138,9 +138,10 @@ services:
       - ./filebeat.docker.yml:/usr/share/filebeat/filebeat.yml
       - ./var/lib/docker/containers:/var/lib/docker/containers:ro
       - ./var/run/docker.sock:/var/run/docker.sock:ro
+      - ./test-filebeat:/logs
     user: root
-    environment:
-      - setup.kibana.host=http://localhost:5601
-      - output.elasticsearch.hosts=http://elastic-search:9200
+#    environment:
+#      - setup.kibana.host=http://0.0.0.0:5601
+#      - output.elasticsearch.hosts=http://elastic-search:9200
     networks:
       - spring-micros-net

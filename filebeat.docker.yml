@@ -2,14 +2,18 @@ filebeat.config:
   modules:
     path: ${path.config}/modules.d/*.yml
     reload.enabled: false
-
-filebeat.autodiscover:
-  providers:
-    - type: docker
-      hints.enabled: true
+    
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /logs/*.log
 
 processors:
 - add_cloud_metadata: ~
 
-output.elasticsearch:
-  hosts: '${ELASTICSEARCH_HOSTS:http://elastic-search:9200}'
+setup.kibana:
+  host: "localhost:5601"
+ 
+output.logstash:
+  hosts: ["logstash-service:5044"]
