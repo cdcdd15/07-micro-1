@@ -140,7 +140,6 @@ services:
       - ./var/run/docker.sock:/var/run/docker.sock:ro
     user: root
     environment:
-      - setup.kibana.host=http://localhost:5601
       - output.elasticsearch.hosts=http://elastic-search:9200
     networks:
       - spring-micros-net

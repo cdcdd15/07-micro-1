@@ -11,5 +11,5 @@ filebeat.autodiscover:
 processors:
 - add_cloud_metadata: ~
 
-output.elasticsearch:
-  hosts: '${ELASTICSEARCH_HOSTS:http://elastic-search:9200}'
+output.logstash:
+  hosts: ["logstash-service:5044"]
