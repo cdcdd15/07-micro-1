@@ -3,10 +3,14 @@ filebeat.config:
     path: ${path.config}/modules.d/*.yml
     reload.enabled: false
 
-filebeat.autodiscover:
-  providers:
-    - type: docker
-      hints.enabled: true
+filebeat.inputs:
+- type: container
+  paths: 
+    - '/var/lib/docker/containers/*/*.log'
+
+processors:
+- add_docker_metadata:
+    host: "unix:///var/run/docker.sock"
 
 processors:
 - add_cloud_metadata: ~
