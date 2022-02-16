@@ -1,8 +1,3 @@
 #!/bin/bash
 set -x
-while $1
-do
-    echo "Check is up.."
-    sleep 5
-	curl -X GET --header 'Authorization: Basic ZWxhc3RpYzpjaGFuZ2VtZQ==' 'http://dev03rex.vrsspharma.com:9200/'
-done
+curl -X POST --header 'Authorization: Basic ZWxhc3RpYzpjaGFuZ2VtZQ==' --header "Content-Type: application/json" -d '{ "query": { "match_all": {} } }' 'http://dev03rex.vrsspharma.com:9200/logstash-2022.01.27-000001/_delete_by_query?conflicts=proceed'
