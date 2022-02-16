@@ -2,7 +2,7 @@
 set -x
 while $1
 do
-    echo "Press [CTRL+C] to stop.."
+    echo "Check is up.."
     sleep 5
-    echo "My second and third argument is $2 & $3"
+	curl -X GET --header 'Authorization: Basic ZWxhc3RpYzpjaGFuZ2VtZQ==' 'http://dev03rex.vrsspharma.com:9200/'
 done
