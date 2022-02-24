@@ -6,4 +6,3 @@ RUN yum -y update && \
 COPY ./script.sh /
 RUN chmod +x /script.sh
 ENTRYPOINT ["/script.sh"]
-CMD ["true", "batman", "superman"]
