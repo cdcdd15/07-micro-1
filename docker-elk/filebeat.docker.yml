@@ -28,4 +28,4 @@ setup.kibana:
   password: "changeme"
  
 output.logstash:
-  hosts: ["logstash-service:5044"]
+  hosts: ["10.0.2.121:5044"]
