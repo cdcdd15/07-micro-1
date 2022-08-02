@@ -118,7 +118,7 @@ services:
     image: cosdin/07-spring-admin-dev:0.0.1-SNAPSHOT
     ports:
       - "9090:9090"
-    restart: always
+#    restart: always
     networks:
       - spring-micros-net
   spring-config-server-service:
