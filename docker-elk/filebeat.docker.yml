@@ -8,19 +8,9 @@ filebeat.inputs:
   enabled: true
   paths:
     - /logs/*.log
-- type: container
-  paths: 
-    - '/var/lib/docker/containers/*/*.log'
 
 processors:
-- add_docker_metadata:
-    host: "unix:///var/run/docker.sock"
-#- add_cloud_metadata: ~
-
-- decode_json_fields:
-    fields: ["message"]
-    target: "json"
-    overwrite_keys: true
+- add_cloud_metadata: ~
 
 setup.kibana:
   host: "localhost:5601"
@@ -28,4 +18,4 @@ setup.kibana:
   password: "changeme"
  
 output.logstash:
-  hosts: ["10.0.2.121:5044"]
+  hosts: ["logstash-service:5044"]
